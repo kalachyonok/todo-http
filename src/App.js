@@ -48,6 +48,21 @@ function App() {
     refetch();
   };
 
+  const changeDataHandler = async (newTask) => {
+    console.log("changeDataHandler  newTask.body:", newTask.body);
+    await fetch(
+      "https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask),
+      }
+    );
+    refetch();
+  };
+
   return (
     <div className={style.wrap}>
       <Header doneTaskCount={doneTaskCount} totalToDoTask={totalToDoTask} />
@@ -73,8 +88,8 @@ function App() {
       />
 
       <Form
-        // onAddNewData={changeDataHandler}
-        onAddNewData={() => console.log("changeDataHandler")}
+        onAddNewData={changeDataHandler}
+        // onAddNewData={() => console.log("changeDataHandler")}
       />
     </div>
   );

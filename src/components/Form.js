@@ -13,7 +13,6 @@ export const Form = memo((props) => {
 
     const newTask = {
       taskTitle: inputName,
-      id: Math.random().toString(),
       isImportant: false,
       isDone: false,
     };
