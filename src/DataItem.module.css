@@ -1,0 +1,23 @@
+.li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-set {
+  display: flex;
+  gap: 5px;
+}
+
+.important {
+  font-weight: 700;
+  color: #4682b4;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.title:hover {
+  cursor: pointer;
+}
