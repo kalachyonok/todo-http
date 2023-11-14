@@ -9,7 +9,7 @@ import { Filter } from "./components/Filter";
 function App() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [inputValue, setInputValue] = useState("");
-  const { isLoading, error, data } = useGetTodos();
+  const { isLoading, error, data, refetch } = useGetTodos();
 
   const filteredData = (tagFilter) => {
     if (tagFilter === "all") {
@@ -37,6 +37,17 @@ function App() {
 
   const totalToDoTask = data.length - doneTaskCount;
 
+  const deleteItemHandler = async (id) => {
+    await fetch(
+      `https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    refetch();
+  };
+
   return (
     <div className={style.wrap}>
       <Header doneTaskCount={doneTaskCount} totalToDoTask={totalToDoTask} />
@@ -53,10 +64,10 @@ function App() {
 
       <DataList
         data={filteredDataStateByInputValue}
-        // onDeleteItem={deleteItemHandler}
-        onDeleteItem={() => console.log("onDeleteItem")}
+        onDeleteItem={deleteItemHandler}
+        // onDeleteItem={() => console.log("onDeleteItem")}
         // onChangeImportantTask={changeImportantTaskHandler}
-        onChangeImportantTask={() => console.log("onChangeImportantTask")}
+        // onChangeImportantTask={() => console.log("onChangeImportantTask")}
         // onChangeDoneTask={changeDoneTaskHandler}
         onChangeDoneTask={() => console.log("onChangeDoneTask")}
       />

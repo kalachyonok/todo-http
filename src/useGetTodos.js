@@ -31,5 +31,5 @@ export const useGetTodos = () => {
     changeDataHandler();
   }, [changeDataHandler]);
 
-  return { isLoading, error, data: dataState };
+  return { isLoading, error, data: dataState, refetch: changeDataHandler };
 };
