@@ -26,7 +26,7 @@ function App() {
 
   const filteredDataByInputValue = (searchValue) => {
     return filteredDataState.filter((item) =>
-      item.taskTitle.toLowerCase().includes(searchValue.toLowerCase())
+      item.title?.toLowerCase().includes(searchValue.toLowerCase())
     );
   };
   const filteredDataStateByInputValue = filteredDataByInputValue(inputValue);
@@ -62,9 +62,7 @@ function App() {
     refetch();
   };
 
-  const changeImportantTaskHandler = async (id, nextImportantStatus) => {
-    // let state = false;
-
+  const changeStatusTaskHandler = async (id, changedTask) => {
     await fetch(
       `https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`,
       {
@@ -72,7 +70,7 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ isImportant: nextImportantStatus }),
+        body: JSON.stringify(changedTask),
       }
     );
 
@@ -96,9 +94,7 @@ function App() {
       <DataList
         data={filteredDataStateByInputValue}
         onDeleteItem={deleteItemHandler}
-        onChangeImportantTask={changeImportantTaskHandler}
-        // onChangeDoneTask={changeDoneTaskHandler}
-        // onChangeDoneTask={() => console.log("onChangeDoneTask")}
+        changeStatusTaskHandler={changeStatusTaskHandler}
       />
 
       <Form onAddNewData={changeDataHandler} />

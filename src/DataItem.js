@@ -1,17 +1,25 @@
 import style from "./DataItem.module.css";
 
 export const DataItem = (props) => {
-  console.log("DataItem  props:", props);
   const deleteItemHandler = () => {
     const deletedItemId = props.id;
     props.onDeleteClick(deletedItemId);
   };
 
-  const nextImportantStatus = !props.isImportant;
+  const nextImportantTaskStatus = {
+    isDone: props.isDone,
+    isImportant: !props.isImportant,
+    title: props.title,
+  };
+
+  const nextDoneTaskStatus = {
+    isDone: !props.isDone,
+    isImportant: props.isImportant,
+    title: props.title,
+  };
 
   const makeItemDoneHandler = () => {
-    const doneId = props.id;
-    props.onClickDoneTask(doneId);
+    props.changeStatusTaskHandler(props.id, nextDoneTaskStatus);
   };
 
   const importantStyle = props.isImportant ? style.important : "";
@@ -37,7 +45,7 @@ export const DataItem = (props) => {
           type="button"
           className="btn btn-outline-success"
           onClick={() =>
-            props.onClickImportantTask(props.id, nextImportantStatus)
+            props.changeStatusTaskHandler(props.id, nextImportantTaskStatus)
           }
         >
           !

@@ -6,7 +6,7 @@ export const modifyData = (obj) => {
       id: objKey,
       isDone: obj[objKey].isDone,
       isImportant: obj[objKey].isImportant,
-      taskTitle: obj[objKey].taskTitle,
+      title: obj[objKey].title,
     });
   }
 

@@ -6,14 +6,13 @@ export const DataList = (props) => {
       {props.data.map((task) => {
         return (
           <DataItem
-            title={task.taskTitle}
+            title={task.title}
             key={task.id}
             id={task.id}
             isImportant={task.isImportant}
             isDone={task.isDone}
             onDeleteClick={props.onDeleteItem}
-            onClickImportantTask={props.onChangeImportantTask}
-            onClickDoneTask={props.onChangeDoneTask}
+            changeStatusTaskHandler={props.changeStatusTaskHandler}
           />
         );
       })}

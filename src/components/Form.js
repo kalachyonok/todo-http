@@ -12,7 +12,7 @@ export const Form = memo((props) => {
     e.preventDefault();
 
     const newTask = {
-      taskTitle: inputName,
+      title: inputName,
       isImportant: false,
       isDone: false,
     };
