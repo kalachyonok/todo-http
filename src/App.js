@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useGetTodos } from "./useGetTodos";
 import { DataList } from "./components/DataList";
 import { Filter } from "./components/Filter";
+import { BASE_URL } from "./const";
 
 function App() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -38,41 +39,33 @@ function App() {
   const totalToDoTask = data.length - doneTaskCount;
 
   const deleteItemHandler = async (id) => {
-    await fetch(
-      `https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`,
-      {
-        method: "DELETE",
-      }
-    );
+    await fetch(`${BASE_URL}/todos/${id}.json`, {
+      method: "DELETE",
+    });
 
     refetch();
   };
 
   const changeDataHandler = async (newTask) => {
-    await fetch(
-      "https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos.json",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTask),
-      }
-    );
+    await fetch(`${BASE_URL}/todos.json`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTask),
+    });
+
     refetch();
   };
 
   const changeStatusTaskHandler = async (id, changedTask) => {
-    await fetch(
-      `https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(changedTask),
-      }
-    );
+    await fetch(`${BASE_URL}/todos/${id}.json`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(changedTask),
+    });
 
     refetch();
   };

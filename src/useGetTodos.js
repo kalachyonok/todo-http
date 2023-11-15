@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { modifyData } from "./utils";
+import { BASE_URL } from "./const";
 
 export const useGetTodos = () => {
   const [dataState, setData] = useState([]);
@@ -10,9 +11,7 @@ export const useGetTodos = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        "https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos.json"
-      );
+      const response = await fetch(`${BASE_URL}/todos.json `);
       if (!response.ok) {
         throw new Error("Ошибка запроса.");
       }
