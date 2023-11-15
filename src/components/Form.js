@@ -32,7 +32,7 @@ export const Form = memo((props) => {
         value={inputName}
       />
       <button className="btn btn-outline-secondary" onClick={onClick}>
-        Add todo
+        Add
       </button>
     </form>
   );
