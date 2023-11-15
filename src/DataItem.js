@@ -1,10 +1,13 @@
 import style from "./DataItem.module.css";
 
 export const DataItem = (props) => {
+  console.log("DataItem  props:", props);
   const deleteItemHandler = () => {
     const deletedItemId = props.id;
     props.onDeleteClick(deletedItemId);
   };
+
+  const nextImportantStatus = !props.isImportant;
 
   const makeItemDoneHandler = () => {
     const doneId = props.id;
@@ -33,7 +36,9 @@ export const DataItem = (props) => {
         <button
           type="button"
           className="btn btn-outline-success"
-          onClick={() => props.onClickImportantTask(props.id)}
+          onClick={() =>
+            props.onClickImportantTask(props.id, nextImportantStatus)
+          }
         >
           !
         </button>

@@ -49,7 +49,6 @@ function App() {
   };
 
   const changeDataHandler = async (newTask) => {
-    console.log("changeDataHandler  newTask.body:", newTask.body);
     await fetch(
       "https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos.json",
       {
@@ -60,6 +59,23 @@ function App() {
         body: JSON.stringify(newTask),
       }
     );
+    refetch();
+  };
+
+  const changeImportantTaskHandler = async (id, nextImportantStatus) => {
+    // let state = false;
+
+    await fetch(
+      `https://http-todo-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isImportant: nextImportantStatus }),
+      }
+    );
+
     refetch();
   };
 
@@ -80,17 +96,12 @@ function App() {
       <DataList
         data={filteredDataStateByInputValue}
         onDeleteItem={deleteItemHandler}
-        // onDeleteItem={() => console.log("onDeleteItem")}
-        // onChangeImportantTask={changeImportantTaskHandler}
-        // onChangeImportantTask={() => console.log("onChangeImportantTask")}
+        onChangeImportantTask={changeImportantTaskHandler}
         // onChangeDoneTask={changeDoneTaskHandler}
-        onChangeDoneTask={() => console.log("onChangeDoneTask")}
+        // onChangeDoneTask={() => console.log("onChangeDoneTask")}
       />
 
-      <Form
-        onAddNewData={changeDataHandler}
-        // onAddNewData={() => console.log("changeDataHandler")}
-      />
+      <Form onAddNewData={changeDataHandler} />
     </div>
   );
 }
